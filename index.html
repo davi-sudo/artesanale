@@ -41,14 +41,9 @@
 
     /* Hero logo */
     .hero-logo {
-      width: 8rem;
+      width: clamp(8rem, 24vw, 16rem);
       height: auto;
-      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
-    }
-    @media (min-width: 640px) {
-      .hero-logo {
-        width: 11rem;
-      }
+      filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.45));
     }
 
     /* Featured product */
@@ -149,7 +144,7 @@
         <span class="nav-ink label-caps text-primary text-xs sm:text-xs mt-0.5">Torteria &amp; Cia</span>
       </a>
 
-      <div class="hidden md:flex items-center gap-9">
+      <div class="hidden md:flex items-center gap-6">
         <a href="#inicio" class="nav-link nav-ink label-caps font-medium text-primary transition-colors duration-300">Início</a>
         <a href="#produtos" class="nav-link nav-ink label-caps font-medium text-primary transition-colors duration-300">Produtos</a>
         <a href="#sobre" class="nav-link nav-ink label-caps font-medium text-primary transition-colors duration-300">Sobre Nós</a>
@@ -398,7 +393,7 @@
         <div class="text-center mt-16">
           <p class="text-primary font-body text-base mb-5">Encomende para eventos especiais, sobremesas de domingo ou saboreie no nosso espaço em Santa Bárbara d'Oeste.</p>
           <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20pedido%20na%20ArtesanaL%C3%8A%20Torteria." target="_blank" rel="noopener noreferrer" class="label-caps px-8 py-3.5 bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground transition-colors duration-300 rounded-sm inline-block">
-            Pedir pelo WhatsApp
+            Solicite nosso cardápio
           </a>
         </div>
 
@@ -525,9 +520,19 @@
             </div>
           </div>
 
-          <!-- Map Iframe Col -->
-          <div class="rounded-sm overflow-hidden min-h-[20rem] border border-background/15">
-            <iframe title="Mapa ArtesanaLÊ Torteria &amp; Cia" src="https://www.google.com/maps?q=ArtesanaLE+Torteria+Riachuelo+913+Santa+Barbara+dOeste+SP&output=embed" width="100%" height="100%" style="border:0; min-height: 20rem; filter: grayscale(0.4) sepia(0.25) contrast(0.95);" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <!-- Loja & Mapa -->
+          <div class="flex flex-col gap-6">
+            <div class="rounded-sm overflow-hidden border border-background/15 relative">
+              <picture>
+                <source srcset="images/fachada.webp" type="image/webp"/>
+                <img src="images/fachada.jpg" alt="Fachada da ArtesanaLÊ Torteria &amp; Cia em Santa Bárbara d'Oeste" class="w-full aspect-[4/3] object-cover" loading="lazy"/>
+              </picture>
+              <span class="absolute top-4 left-4 label-caps px-3 py-1.5 bg-background/90 text-primary rounded-sm text-xs shadow-xs font-medium">Nossa Loja</span>
+            </div>
+
+            <div class="rounded-sm overflow-hidden min-h-[20rem] border border-background/15">
+              <iframe title="Mapa ArtesanaLÊ Torteria &amp; Cia" src="https://www.google.com/maps?q=ArtesanaLE+Torteria+Riachuelo+913+Santa+Barbara+dOeste+SP&output=embed" width="100%" height="100%" style="border:0; min-height: 20rem; filter: grayscale(0.4) sepia(0.25) contrast(0.95);" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
           </div>
 
         </div>

@@ -9,25 +9,43 @@
 .font-medium{font-weight:500}.font-semibold{font-weight:600}.font-normal{font-weight:400}
 .label-caps{font-size:.75rem;letter-spacing:.14em}
 
-/* Hero: scrim concentrado no texto + topo escuro para o menu */
-.hero-scrim{background:
-  linear-gradient(to bottom,hsl(var(--foreground)/.65) 0%,hsl(var(--foreground)/0) 26%),
-  radial-gradient(ellipse 75% 55% at 50% 58%,hsl(var(--foreground)/.62) 0%,hsl(var(--foreground)/.28) 65%,hsl(var(--foreground)/.18) 100%),
-  linear-gradient(to top,hsl(var(--foreground)/.55) 0%,hsl(var(--foreground)/0) 30%)}
-.hero-title{text-shadow:0 2px 24px rgba(0,0,0,.35);letter-spacing:-.01em}
-.hero-sub{text-shadow:0 1px 12px rgba(0,0,0,.5)}
-.hero-sub-shadow{text-shadow:0 1px 8px rgba(0,0,0,.6)}
+/* Hero: overlay escuro com gradiente marrom-escuro para legibilidade (não bloqueia cliques) */
+#inicio{position:relative}
+#inicio::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:
+    linear-gradient(to bottom, rgba(30,18,10,.65) 0%, rgba(30,18,10,.40) 20%, rgba(30,18,10,0) 35%),
+    linear-gradient(to top, rgba(30,18,10,.45) 0%, rgba(30,18,10,.20) 40%, rgba(30,18,10,.08) 100%),
+    radial-gradient(ellipse 72% 46% at 50% 60%, rgba(30,18,10,.46) 0%, rgba(30,18,10,.28) 62%, rgba(30,18,10,0) 100%),
+    linear-gradient(to bottom, rgba(30,18,10,.12) 0%, rgba(30,18,10,.12) 100%);
+}
+.hero-scrim{display:none}
+.hero-title{text-shadow:0 2px 30px rgba(0,0,0,.45),0 1px 10px rgba(0,0,0,.35);letter-spacing:-.01em;color:#ffffff;font-weight:500}
+.hero-sub{text-shadow:0 1px 14px rgba(0,0,0,.55),0 1px 6px rgba(0,0,0,.35);font-size:1.25rem;font-weight:500;color:#ffffff}
+.hero-sub-shadow{text-shadow:0 1px 12px rgba(0,0,0,.5),0 1px 4px rgba(0,0,0,.35);color:#ffffff}
 
-/* Navbar sobre o hero (transparente): branco; ao rolar volta às cores da marca */
-#navbar:not(.nav-solid) .nav-ink{color:hsl(var(--background));text-shadow:0 1px 10px rgba(0,0,0,.45)}
+/* Navbar sobre o hero (transparente): branco/creme com sombra sutil; ao rolar volta às cores da marca */
+#navbar:not(.nav-solid) .nav-ink{color:#FFFFFF;text-shadow:0 1px 12px rgba(0,0,0,.35)}
 #navbar:not(.nav-solid) .nav-gold{color:hsl(var(--gold-light))}
 #navbar:not(.nav-solid) .nav-cta{background:hsl(var(--background));color:hsl(var(--primary));text-shadow:none}
+#navbar .nav-link{color:hsl(var(--primary));font-size:.844rem;font-weight:600}
+#navbar:not(.nav-solid) .nav-link{color:#FFFFFF;text-shadow:0 1px 12px rgba(0,0,0,.35)}
 #navbar .nav-link:hover{color:hsl(var(--gold-ink))}
 #navbar:not(.nav-solid) .nav-link:hover{color:hsl(var(--gold-light))}
 #navbar:not(.nav-solid) .nav-cta:hover{background:hsl(var(--accent));color:hsl(var(--accent-foreground))}
 
+/* Ao rolar: header fixo com fundo sólido creme e texto marrom-escuro */
+#navbar.nav-solid{background-color:rgba(251,248,243,.95)}
+#navbar.nav-solid .nav-ink{color:#3B2418;text-shadow:none}
+#navbar.nav-solid .nav-link{color:#3B2418;text-shadow:none}
+#navbar.nav-solid .nav-link:hover{color:hsl(var(--gold-ink))}
+
 /* Tamanho do título do hero (fluido) */
-.hero-title{font-size:clamp(2.9rem,8.5vw,5.75rem)}
+.hero-title{font-size:clamp(3.2rem,9vw,6.5rem);font-weight:500}
 
 /* Utilitários usados no HTML que não estavam no CSS compilado */
 .pt-5{padding-top:1.25rem}.pt-32{padding-top:8rem}.pb-12{padding-bottom:3rem}.h-6{height:1.5rem}
@@ -36,3 +54,34 @@
 @keyframes bounce{0%,100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,.2,1)}}
 @media (min-width:640px){.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}.sm\:text-xs{font-size:.75rem;line-height:1rem}.sm\:inline-block{display:inline-block}.sm\:w-auto{width:auto}}
 @media (min-width:768px){.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Utilitários ausentes no CSS compilado (restaurados) */
+.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.bg-accent\/40{background-color:hsl(var(--accent) / .4)}
+.bg-background\/5{background-color:hsl(var(--background) / .05)}
+.bg-emerald-900\/60{background-color:rgb(6 78 59 / .6)}
+.bg-pink-900\/40{background-color:rgb(131 24 67 / .4)}
+.gap-14{gap:3.5rem}
+.mt-3{margin-top:.75rem}
+.rounded-xs{border-radius:.125rem}
+.scroll-smooth{scroll-behavior:smooth}
+.space-y-8>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}
+.text-\[10px\]{font-size:10px;line-height:1.4}
+.text-emerald-300{color:#6ee7b7}
+.text-pink-300{color:#f9a8d4}
+.top-3{top:.75rem}
+.bg-gradient-to-t{background-image:linear-gradient(to top, var(--tw-gradient-stops))}
+.from-primary\/90{--tw-gradient-from:hsl(var(--primary) / .9) var(--tw-gradient-from-position);--tw-gradient-to:hsl(var(--primary) / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}
+.via-primary\/50{--tw-gradient-to:hsl(var(--primary) / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), hsl(var(--primary) / .5) var(--tw-gradient-via-position), var(--tw-gradient-to)}
+.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}
+.hover\:bg-accent:hover{background-color:hsl(var(--accent))}
+.hover\:bg-background\/10:hover{background-color:hsl(var(--background) / .1)}
+.hover\:border-accent\/40:hover{border-color:hsl(var(--accent) / .4)}
+.hover\:text-accent-foreground:hover{color:hsl(var(--accent-foreground))}
+.hover\:text-background:hover{color:hsl(var(--background))}
+.hover\:text-primary:hover{color:hsl(var(--primary))}
+.group:hover .group-hover\:text-gold-light{color:hsl(var(--gold-light))}
+.selection\:bg-accent::selection{background-color:hsl(var(--accent))}
+.selection\:text-accent-foreground::selection{color:hsl(var(--accent-foreground))}
+@media (min-width:640px){.sm\:p-8{padding:2rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}}
+@media (min-width:1024px){.lg\:gap-16{gap:4rem}}
