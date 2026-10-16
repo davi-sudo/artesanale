@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link rel="icon" type="image/png" href="images/logo.png"/>
+  <meta content="ArtesanaLÊ Torteria &amp; Cia - alta gastronomia em cada torta. Especialistas em tortas artesanais, doces, salgadas e acompanhamentos em Santa Bárbara d'Oeste. Encomendas e pronta entrega." name="description"/>
+  <meta content="ArtesanaLÊ Torteria &amp; Cia" property="og:title"/>
+  <meta content="Produtos elaborados artesanalmente. Tortas doces, salgadas, torteletes, massas e acompanhamentos em Santa Bárbara d'Oeste - SP." property="og:description"/>
+  <meta content="website" property="og:type"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <title>ArtesanaLÊ Torteria &amp; Cia – Tortas Artesanais em Santa Bárbara d'Oeste</title>
+
+  <link rel="stylesheet" href="style.css"/>
+
+  <style>
+    .fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-bg-anim {
+      animation: heroZoom 10s ease-out forwards;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.06); }
+      to { transform: scale(1); }
+    }
+    @keyframes pulseRing {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      50% { transform: scale(1.25); opacity: 0.2; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+
+    /* Hero logo */
+    .hero-logo {
+      width: 7rem;
+      height: auto;
+      opacity: 0.9;
+      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+    }
+    @media (min-width: 640px) {
+      .hero-logo {
+        width: 9rem;
+      }
+    }
+
+    /* Featured product */
+    .product-feature {
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+      margin-bottom: 3.5rem;
+      box-shadow: 0 18px 40px -20px rgba(39, 57, 48, 0.35);
+    }
+    .product-feature-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 4/3;
+      transition: transform 0.7s ease-out;
+    }
+    .product-feature:hover .product-feature-img {
+      transform: scale(1.03);
+    }
+    @media (min-width: 768px) {
+      .product-feature-img {
+        aspect-ratio: 21/9;
+      }
+    }
+
+    /* Modern Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 1.75rem;
+    }
+    @media (min-width: 640px) {
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (min-width: 1024px) {
+      .product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .product-card {
+      background: #ffffff;
+      border: 1px solid rgba(39, 57, 48, 0.08);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px -10px rgba(39, 57, 48, 0.12);
+      border-color: rgba(200, 162, 86, 0.4);
+    }
+    .product-img-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: #f4efe6;
+    }
+    .product-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .product-card:hover .product-thumb {
+      transform: scale(1.06);
+    }
+    .product-content {
+      padding: 1.25rem 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body class="bg-background text-foreground antialiased selection:bg-accent selection:text-accent-foreground font-body">
+
+  <!-- Left Scroll Progress Bar -->
+  <div class="fixed left-0 top-0 z-40 h-full w-[2px] pointer-events-none hidden sm:block">
+    <div id="scroll-progress" class="w-full bg-accent/40 origin-top" style="height: 0%; transition: height 0.1s linear;"></div>
+  </div>
+
+  <!-- Header / Navbar -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-500 bg-transparent">
+    <nav class="mx-auto max-w-7xl px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
+      <a href="#inicio" class="flex flex-col leading-none">
+        <span class="nav-ink font-serif font-medium text-2xl sm:text-[1.7rem] text-primary tracking-wide">
+          Artesana<span class="nav-gold text-gold-ink">LÊ</span>
+        </span>
+        <span class="nav-ink label-caps text-primary text-xs sm:text-xs mt-0.5">Torteria &amp; Cia</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-9">
+        <a href="#inicio" class="nav-link nav-ink label-caps font-medium text-primary transition-colors duration-300">Início</a>
+        <a href="#produtos" class="nav-link nav-ink label-caps font-medium text-primary transition-colors duration-300">Produtos</a>
+        <a href="#sobre" class="nav-link nav-ink label-caps font-medium text-primary transition-colors duration-300">Sobre Nós</a>
+        <a href="#contato" class="nav-link nav-ink label-caps font-medium text-primary transition-colors duration-300">Contato</a>
+      </div>
+
+      <div class="hidden md:block">
+        <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20ArtesanaL%C3%8A%20Torteria." target="_blank" rel="noopener noreferrer" class="nav-cta label-caps font-medium px-5 py-2.5 bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground transition-colors duration-300 rounded-sm inline-block">
+          Fale Conosco
+        </a>
+      </div>
+
+      <button id="mobile-menu-btn" class="nav-ink md:hidden text-primary p-1" aria-label="Abrir Menu">
+        <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden bg-background border-t border-accent/25">
+      <div class="px-5 py-5 flex flex-col gap-1">
+        <a href="#inicio" class="mobile-nav-link label-caps font-medium py-3 text-primary border-b border-border/60">Início</a>
+        <a href="#produtos" class="mobile-nav-link label-caps font-medium py-3 text-primary border-b border-border/60">Produtos</a>
+        <a href="#sobre" class="mobile-nav-link label-caps font-medium py-3 text-primary border-b border-border/60">Sobre Nós</a>
+        <a href="#contato" class="mobile-nav-link label-caps font-medium py-3 text-primary border-b border-border/60">Contato</a>
+        <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20ArtesanaL%C3%8A%20Torteria." target="_blank" rel="noopener noreferrer" class="label-caps mt-4 px-5 py-3 bg-primary text-primary-foreground text-center rounded-sm">
+          Fale Conosco
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pb-16 md:pb-0">
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-[100svh] flex flex-col justify-between">
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute inset-0">
+          <video src="Preparing_lemon_meringue_tart_20261016084909.mp4" poster="images/hero.jpg" autoplay muted loop playsinline preload="auto" aria-label="Torta de Limão com Merengue artesanal da ArtesanaLÊ" class="w-full h-full object-cover"></video>
+        </div>
+        <div class="hero-scrim absolute inset-0"></div>
+      </div>
+
+      <!-- Logo discreto (canto inferior esquerdo) -->
+      <div style="position: absolute; left: 1.5rem; bottom: 2rem; z-index: 10; pointer-events: none;">
+        <img src="images/logo-original.png" alt="ArtesanaLÊ Torteria &amp; Cia" class="hero-logo" decoding="async"/>
+      </div>
+
+      <div></div> <!-- Spacer -->
+
+      <div class="relative z-10 flex flex-col items-center justify-center text-center px-5 pt-32 pb-12">
+
+        <h1 class="hero-title font-serif font-medium text-background text-balance leading-[1.05] max-w-4xl tracking-tight">
+          Alta gastronomia<br class="hidden sm:block"/> em cada torta.
+        </h1>
+
+        <p class="hero-sub mt-7 max-w-xl text-background font-body font-normal text-lg sm:text-xl leading-relaxed text-balance">
+          Especialistas em tortas artesanais, doces, salgadas e acompanhamentos, em Santa Bárbara d'Oeste.
+        </p>
+
+        <div class="mt-10 flex justify-center w-full sm:w-auto px-4">
+          <a href="#produtos" class="label-caps font-medium px-8 py-3.5 bg-background text-primary hover:bg-accent hover:text-accent-foreground transition-colors duration-300 rounded-sm text-center">
+            Ver Produtos
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <a href="#produtos" class="relative z-10 pb-8 flex flex-col items-center gap-2 text-background hover:text-background transition-colors hero-sub-shadow">
+        <span class="label-caps text-xs">Explorar</span>
+        <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </a>
+    </section>
+
+    <!-- Produtos -->
+    <section id="produtos" class="py-20 sm:py-28 px-5 sm:px-8 bg-secondary/40">
+      <div class="mx-auto max-w-7xl">
+
+        <div class="text-center mb-14">
+          <span class="label-caps text-gold-ink font-semibold tracking-widest">Nossos Produtos</span>
+          <h2 class="font-serif font-normal text-primary text-3xl sm:text-5xl mt-4 text-balance">Obras-primas da casa</h2>
+          <p class="mt-5 max-w-xl mx-auto text-primary font-body text-balance">
+            Cada torta é elaborada artesanalmente — da massa crocante ao recheio aveludado — com o cuidado que só o feito à mão oferece.
+          </p>
+        </div>
+
+        <!-- Destaque da Casa: Torta de Limão -->
+        <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20a%20Torta%20de%20Lim%C3%A3o." target="_blank" rel="noopener noreferrer" class="product-feature group block">
+          <picture>
+            <source srcset="images/torta-limao.webp" type="image/webp"/>
+            <img src="images/torta-limao.jpg" alt="Torta de Limão com Merengue Maçaricado" class="product-feature-img" loading="lazy"/>
+          </picture>
+          <span class="absolute top-4 left-4 label-caps px-3 py-1.5 bg-background/90 text-primary rounded-sm text-xs shadow-xs font-medium">Torta Doce</span>
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent p-6 sm:p-8 text-background">
+            <span class="label-caps text-gold-light text-xs font-semibold">Destaque da Casa</span>
+            <h3 class="font-serif text-3xl sm:text-4xl font-medium mt-1">Torta de Limão</h3>
+            <p class="text-background/90 text-sm sm:text-base mt-2 max-w-lg">Massa amanteigada crocante com curd de limão equilibrado e merengue generoso tostado no maçarico.</p>
+            <span class="mt-4 inline-flex items-center gap-2 label-caps text-xs font-medium text-background group-hover:text-gold-light transition-colors">
+              <span>Encomendar via WhatsApp</span>
+              <span>&rarr;</span>
+            </span>
+          </div>
+        </a>
+
+        <!-- Grade com os demais produtos da casa -->
+        <div class="product-grid">
+
+          <!-- 2. Torta de Coco Cremoso -->
+          <article class="product-card">
+            <div class="product-img-box">
+              <picture>
+                <source srcset="images/torta-coco-cremoso.webp" type="image/webp"/>
+                <img src="images/torta-coco-cremoso.jpg" alt="Torta de Coco Cremoso" class="product-thumb" loading="lazy"/>
+              </picture>
+              <span class="absolute top-3 left-3 label-caps px-2.5 py-1 bg-background/95 text-primary text-[10px] font-semibold rounded-xs">Torta Doce</span>
+            </div>
+            <div class="product-content">
+              <div>
+                <h3 class="font-serif text-xl font-medium text-primary">Torta de Coco Cremoso</h3>
+                <p class="mt-2 text-primary/80 text-sm leading-relaxed">
+                  Massa artesanal amanteigada, recheio denso de coco cremoso e lâminas finas de coco fresco no topo.
+                </p>
+              </div>
+              <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20a%20Torta%20de%20Coco%20Cremoso." target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-between text-xs font-medium label-caps text-gold-ink hover:text-primary transition-colors">
+                <span>Encomendar via WhatsApp</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 3. Torta de Queijo com Tomate, Queijo de Búfala e Pesto -->
+          <article class="product-card">
+            <div class="product-img-box">
+              <picture>
+                <source srcset="images/torta-queijo-tomate-bufala-pesto.webp" type="image/webp"/>
+                <img src="images/torta-queijo-tomate-bufala-pesto.jpg" alt="Torta de queijo com tomate, queijo de búfala e pesto de manjericão" class="product-thumb" loading="lazy"/>
+              </picture>
+              <span class="absolute top-3 left-3 label-caps px-2.5 py-1 bg-background/95 text-primary text-[10px] font-semibold rounded-xs">Torta Salgada</span>
+            </div>
+            <div class="product-content">
+              <div>
+                <h3 class="font-serif text-xl font-medium text-primary">Torta de Queijo com Tomate, Búfala e Pesto</h3>
+                <p class="mt-2 text-primary/80 text-sm leading-relaxed">
+                  Massa folhada crocante, queijo selecionado, tomate maduro, queijo de búfala e toque de pesto fresco.
+                </p>
+              </div>
+              <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20a%20Torta%20de%20Queijo%20com%20Tomate%2C%20B%C3%BAfala%20e%20Pesto." target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-between text-xs font-medium label-caps text-gold-ink hover:text-primary transition-colors">
+                <span>Encomendar via WhatsApp</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 4. Caponata de Berinjela -->
+          <article class="product-card">
+            <div class="product-img-box">
+              <picture>
+                <source srcset="images/caponata-berinjela.webp" type="image/webp"/>
+                <img src="images/caponata-berinjela.jpg" alt="Caponata de Berinjela" class="product-thumb" loading="lazy"/>
+              </picture>
+              <span class="absolute top-3 left-3 label-caps px-2.5 py-1 bg-background/95 text-primary text-[10px] font-semibold rounded-xs">Acompanhamento</span>
+            </div>
+            <div class="product-content">
+              <div>
+                <h3 class="font-serif text-xl font-medium text-primary">Caponata de Berinjela</h3>
+                <p class="mt-2 text-primary/80 text-sm leading-relaxed">
+                  Berinjelas macias refogadas em azeite extravirgem, pimentões, uvas-passas e ervas aromáticas da casa.
+                </p>
+              </div>
+              <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20a%20Caponata%20de%20Berinjela." target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-between text-xs font-medium label-caps text-gold-ink hover:text-primary transition-colors">
+                <span>Encomendar via WhatsApp</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 5. Tortele Dois Amores -->
+          <article class="product-card">
+            <div class="product-img-box">
+              <picture>
+                <source srcset="images/tortelete-dois-amores.webp" type="image/webp"/>
+                <img src="images/tortelete-dois-amores.jpg" alt="Tortele Dois Amores" class="product-thumb" loading="lazy"/>
+              </picture>
+              <span class="absolute top-3 left-3 label-caps px-2.5 py-1 bg-background/95 text-primary text-[10px] font-semibold rounded-xs">Individual Doce</span>
+            </div>
+            <div class="product-content">
+              <div>
+                <h3 class="font-serif text-xl font-medium text-primary">Tortele Dois Amores</h3>
+                <p class="mt-2 text-primary/80 text-sm leading-relaxed">
+                  Encontro irresistível de brigadeiro de chocolate gourmet e brigadeiro branco em massa crocante com cereja.
+                </p>
+              </div>
+              <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20o%20Tortele%20Dois%20Amores." target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-between text-xs font-medium label-caps text-gold-ink hover:text-primary transition-colors">
+                <span>Encomendar via WhatsApp</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 6. Tortele de Ninho com Uvas -->
+          <article class="product-card">
+            <div class="product-img-box">
+              <picture>
+                <source srcset="images/tortelete-ninho-uvas.webp" type="image/webp"/>
+                <img src="images/tortelete-ninho-uvas.jpg" alt="Tortele de Ninho com Uvas" class="product-thumb" loading="lazy"/>
+              </picture>
+              <span class="absolute top-3 left-3 label-caps px-2.5 py-1 bg-background/95 text-primary text-[10px] font-semibold rounded-xs">Individual Doce</span>
+            </div>
+            <div class="product-content">
+              <div>
+                <h3 class="font-serif text-xl font-medium text-primary">Tortele de Ninho com Uvas</h3>
+                <p class="mt-2 text-primary/80 text-sm leading-relaxed">
+                  Creme nobre de Leite Ninho combinado com a leveza e refrescância de uvas verdes sem semente selecionadas.
+                </p>
+              </div>
+              <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20o%20Tortele%20de%20Ninho%20com%20Uvas." target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-between text-xs font-medium label-caps text-gold-ink hover:text-primary transition-colors">
+                <span>Encomendar via WhatsApp</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 7. Cheesecake com Frutas Vermelhas -->
+          <article class="product-card">
+            <div class="product-img-box">
+              <picture>
+                <source srcset="images/cheesecake-frutas-vermelhas.webp" type="image/webp"/>
+                <img src="images/cheesecake-frutas-vermelhas.jpg" alt="Cheesecake com Frutas Vermelhas" class="product-thumb" loading="lazy"/>
+              </picture>
+              <span class="absolute top-3 left-3 label-caps px-2.5 py-1 bg-background/95 text-primary text-[10px] font-semibold rounded-xs">Sobremesa</span>
+            </div>
+            <div class="product-content">
+              <div>
+                <h3 class="font-serif text-xl font-medium text-primary">Cheesecake com Frutas Vermelhas</h3>
+                <p class="mt-2 text-primary/80 text-sm leading-relaxed">
+                  Textura sedosa de cream cheese artesanal sobre base amanteigada, geleia caseira de frutas vermelhas e morango.
+                </p>
+              </div>
+              <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20o%20Cheesecake%20com%20Frutas%20Vermelhas." target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-between text-xs font-medium label-caps text-gold-ink hover:text-primary transition-colors">
+                <span>Encomendar via WhatsApp</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- CTA Único -->
+        <div class="text-center mt-16">
+          <p class="text-primary font-body text-base mb-5">Encomende para eventos especiais, sobremesas de domingo ou saboreie no nosso espaço em Santa Bárbara d'Oeste.</p>
+          <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20pedido%20na%20ArtesanaL%C3%8A%20Torteria." target="_blank" rel="noopener noreferrer" class="label-caps px-8 py-3.5 bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground transition-colors duration-300 rounded-sm inline-block">
+            Pedir pelo WhatsApp
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <section id="sobre" class="py-20 sm:py-28 px-5 sm:px-8">
+      <div class="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div class="relative">
+          <div class="overflow-hidden rounded-sm shadow-md">
+            <picture>
+              <source srcset="images/torta-coco-cremoso.webp" type="image/webp"/>
+              <img src="images/torta-coco-cremoso.jpg" alt="Torta de Coco Cremoso da ArtesanaLÊ" class="w-full aspect-[4/3] object-cover" loading="lazy"/>
+            </picture>
+          </div>
+          <div class="absolute -bottom-6 -right-2 sm:right-6 bg-background border border-accent/40 px-6 py-5 rounded-sm max-w-[15rem] shadow-lg">
+            <p class="font-serif text-3xl text-gold-ink leading-none font-semibold">+4,8 mil</p>
+            <p class="label-caps text-primary mt-2 text-xs">Seguidores no Instagram</p>
+          </div>
+        </div>
+
+        <div>
+          <span class="label-caps text-gold-ink font-semibold tracking-widest">Sobre Nós</span>
+          <h2 class="font-serif font-normal text-primary text-3xl sm:text-5xl mt-4 leading-[1.1] text-balance">
+            O feito à mão é o nosso diferencial — e não fica escondido.
+          </h2>
+          <div class="mt-7 space-y-5 text-primary font-body leading-relaxed text-base">
+            <p>
+              A ArtesanaLÊ Torteria &amp; Cia nasceu em Santa Bárbara d'Oeste da paixão em levar a alta confeitaria e gastronomia artesanal para o dia a dia, sem perder o carinho e o afeto de cada fornada.
+            </p>
+            <p>
+              Sofisticada e acolhedora: aqui você prova uma tortelete com um café fresco moído no local, encomenda a torta assinatura para seu evento de família ou garante antepastos especiais para presentear. Variedade em doces, salgados e massas artesanais.
+            </p>
+            <p class="font-serif text-xl text-primary italic pt-2">
+              "Produtos Elaborados Artesanalmente."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato & Rodapé -->
+    <footer id="contato" class="bg-foreground text-background">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 sm:py-28">
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-16 items-start">
+
+          <div class="space-y-8">
+            <div>
+              <span class="label-caps text-gold-light tracking-widest text-xs font-semibold">Localização &amp; Contato</span>
+              <h2 class="font-serif font-normal text-3xl sm:text-4xl text-background mt-3">
+                Venha nos visitar ou faça seu pedido
+              </h2>
+            </div>
+
+            <!-- Contact List -->
+            <div class="space-y-4">
+
+              <!-- WhatsApp -->
+              <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20ArtesanaL%C3%8A%20Torteria." target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-sm border border-background/15 hover:border-accent/40 bg-background/5 hover:bg-background/10 transition-colors group">
+                <span class="w-10 h-10 rounded-full bg-emerald-900/60 flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 text-emerald-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c4.56 0 8.25 3.69 8.25 8.24 0 2.2-.86 4.28-2.42 5.84a8.21 8.21 0 0 1-5.83 2.41c-1.47 0-2.93-.39-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.188 8.188 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8 2.53 1.09 2.53.73 2.99.69.46-.04 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.3z"/>
+                  </svg>
+                </span>
+                <div>
+                  <p class="label-caps text-background/80 text-xs">Atendimento &amp; Pedidos</p>
+                  <p class="font-serif text-2xl mt-1">(19) 99197-5629</p>
+                </div>
+              </a>
+
+              <!-- Instagram -->
+              <a href="https://instagram.com/artesanale_torteria_e_cia" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-sm border border-background/15 hover:border-accent/40 bg-background/5 hover:bg-background/10 transition-colors group">
+                <span class="w-10 h-10 rounded-full bg-pink-900/40 flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 text-pink-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                </span>
+                <div>
+                  <p class="label-caps text-background/80 text-xs">Siga no Instagram</p>
+                  <p class="font-serif text-2xl mt-1">@artesanale_torteria_e_cia</p>
+                </div>
+              </a>
+
+            </div>
+
+            <div class="space-y-5 pt-2">
+              <div class="flex items-start gap-4">
+                <svg class="w-5 h-5 text-gold-light shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <div>
+                  <p class="label-caps text-background/80 text-xs">Endereço</p>
+                  <p class="font-body text-background mt-1">R. Riachuelo, 913 – Centro, Santa Bárbara d'Oeste – SP</p>
+                  <p class="font-body text-background/80 text-sm">CEP 13450-020</p>
+                  <a href="https://www.google.com/maps/search/?api=1&query=ArtesanaLE+Torteria+Riachuelo+913+Santa+Barbara+dOeste+SP" target="_blank" rel="noopener noreferrer" class="label-caps text-gold-light mt-2 inline-block hover:text-background text-xs">
+                    Ver no mapa &rarr;
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <svg class="w-5 h-5 text-gold-light shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M12 6v6l4 2"/>
+                </svg>
+                <div>
+                  <p class="label-caps text-background/80 text-xs">Horário de funcionamento</p>
+                  <ul class="mt-1 space-y-0.5">
+                    <li class="font-body text-background text-sm">
+                      <span class="text-background/80">Terça – Sexta:</span> 10h – 18h30
+                    </li>
+                    <li class="font-body text-background text-sm">
+                      <span class="text-background/80">Sábado:</span> 9h – 13h30
+                    </li>
+                    <li class="font-body text-background text-sm">
+                      <span class="text-background/80">Domingo &amp; Segunda:</span> Fechado
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Map Iframe Col -->
+          <div class="rounded-sm overflow-hidden min-h-[20rem] border border-background/15">
+            <iframe title="Mapa ArtesanaLÊ Torteria &amp; Cia" src="https://www.google.com/maps?q=ArtesanaLE+Torteria+Riachuelo+913+Santa+Barbara+dOeste+SP&output=embed" width="100%" height="100%" style="border:0; min-height: 20rem; filter: grayscale(0.4) sepia(0.25) contrast(0.95);" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+
+        </div>
+
+        <div class="filigree border-accent/30 mt-16 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <p class="font-serif text-xl text-background">
+            Artesana<span class="text-gold-light">LÊ</span> <span class="text-background/80 text-base">Torteria &amp; Cia</span>
+          </p>
+          <p class="label-caps text-background/75 text-xs">
+            Produtos Elaborados Artesanalmente • Santa Bárbara d'Oeste – SP
+          </p>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20ArtesanaL%C3%8A%20Torteria." target="_blank" rel="noopener noreferrer" aria-label="Chamar no WhatsApp" style="position: fixed !important; bottom: 28px !important; right: 24px !important; z-index: 99999 !important; display: flex !important; align-items: center; text-decoration: none;" class="group">
+    <!-- Pulse Effect -->
+    <span style="position: absolute; inset: -4px; border-radius: 9999px; background-color: #25D366; opacity: 0.35; animation: pulseRing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; pointer-events: none;"></span>
+
+    <!-- Button Body -->
+    <span style="position: relative; display: flex; align-items: center; justify-content: center; width: 62px; height: 62px; border-radius: 9999px; background-color: #25D366; color: white; box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.1); transition: transform 0.25s ease, background-color 0.25s ease;">
+      <svg style="width: 34px; height: 34px; fill: white;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c4.56 0 8.25 3.69 8.25 8.24 0 2.2-.86 4.28-2.42 5.84a8.21 8.21 0 0 1-5.83 2.41c-1.47 0-2.93-.39-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.188 8.188 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8 2.53 1.09 2.53.73 2.99.69.46-.04 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.3z"/>
+      </svg>
+    </span>
+
+    <!-- Floating Label -->
+    <span class="hidden sm:inline-block label-caps" style="margin-right: 12px; order: -1; background-color: #ffffff; color: #273930; padding: 7px 14px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.12); border: 1px solid rgba(0,0,0,0.06); letter-spacing: 0.08em; transition: opacity 0.2s ease;">
+      Fale Conosco
+    </span>
+  </a>
+
+  <script>
+    // Scroll progress bar & Navbar background
+    const navbar = document.getElementById("navbar");
+    const progress = document.getElementById("scroll-progress");
+
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      navbar.classList.toggle("nav-solid", scrollY > 40);
+      if (scrollY > 40) {
+        navbar.classList.add("bg-background/95", "backdrop-blur-sm", "border-b", "border-accent/25", "shadow-xs");
+        navbar.classList.remove("bg-transparent");
+      } else {
+        navbar.classList.remove("bg-background/95", "backdrop-blur-sm", "border-b", "border-accent/25", "shadow-xs");
+        navbar.classList.add("bg-transparent");
+      }
+
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (docHeight > 0) {
+        const pct = (scrollY / docHeight) * 100;
+        progress.style.height = `${pct}%`;
+      }
+    }, { passive: true });
+
+    // Mobile Menu Toggle
+    const mobileBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const hamburgerIcon = document.getElementById("hamburger-icon");
+    const closeIcon = document.getElementById("close-icon");
+
+    function toggleMenu() {
+      const isOpen = !mobileMenu.classList.contains("hidden");
+      if (isOpen) {
+        mobileMenu.classList.add("hidden");
+        hamburgerIcon.classList.remove("hidden");
+        closeIcon.classList.add("hidden");
+      } else {
+        mobileMenu.classList.remove("hidden");
+        hamburgerIcon.classList.add("hidden");
+        closeIcon.classList.remove("hidden");
+      }
+    }
+
+    mobileBtn.onclick = toggleMenu;
+    document.querySelectorAll(".mobile-nav-link").forEach(link => {
+      link.onclick = () => {
+        mobileMenu.classList.add("hidden");
+        hamburgerIcon.classList.remove("hidden");
+        closeIcon.classList.add("hidden");
+      };
+    });
+  </script>
+
+</body>
+</html>
