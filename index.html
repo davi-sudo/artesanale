@@ -41,14 +41,13 @@
 
     /* Hero logo */
     .hero-logo {
-      width: 7rem;
+      width: 8rem;
       height: auto;
-      opacity: 0.9;
-      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
     }
     @media (min-width: 640px) {
       .hero-logo {
-        width: 9rem;
+        width: 11rem;
       }
     }
 
@@ -198,28 +197,19 @@
         <div class="hero-scrim absolute inset-0"></div>
       </div>
 
-      <!-- Logo discreto (canto inferior esquerdo) -->
-      <div style="position: absolute; left: 1.5rem; bottom: 2rem; z-index: 10; pointer-events: none;">
-        <img src="images/logo-original.png" alt="ArtesanaLÊ Torteria &amp; Cia" class="hero-logo" decoding="async"/>
-      </div>
-
       <div></div> <!-- Spacer -->
 
       <div class="relative z-10 flex flex-col items-center justify-center text-center px-5 pt-32 pb-12">
 
-        <h1 class="hero-title font-serif font-medium text-background text-balance leading-[1.05] max-w-4xl tracking-tight">
+        <img src="images/logo-original.png" alt="ArtesanaLÊ Torteria &amp; Cia" class="hero-logo" decoding="async"/>
+
+        <h1 class="hero-title mt-6 font-serif font-medium text-background text-balance leading-[1.05] max-w-4xl tracking-tight">
           Alta gastronomia<br class="hidden sm:block"/> em cada torta.
         </h1>
 
         <p class="hero-sub mt-7 max-w-xl text-background font-body font-normal text-lg sm:text-xl leading-relaxed text-balance">
           Especialistas em tortas artesanais, doces, salgadas e acompanhamentos, em Santa Bárbara d'Oeste.
         </p>
-
-        <div class="mt-10 flex justify-center w-full sm:w-auto px-4">
-          <a href="#produtos" class="label-caps font-medium px-8 py-3.5 bg-background text-primary hover:bg-accent hover:text-accent-foreground transition-colors duration-300 rounded-sm text-center">
-            Ver Produtos
-          </a>
-        </div>
       </div>
 
       <!-- Scroll Indicator -->
