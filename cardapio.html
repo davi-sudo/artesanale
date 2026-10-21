@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<title>Cardápio — ArtesanaLÊ Torteria &amp; Cia</title>
+
+<!-- Limpa "text fragments" (#:~:text=...) da barra de endereços, sem recarregar a página -->
+<script>
+  (function () {
+    if (!window.history || typeof window.history.replaceState !== "function") return;
+    try {
+      var url = new URL(window.location.href);
+      var marker = url.hash.indexOf(":~:text=");
+      if (marker === -1) return;
+      // Mantém o âncora anterior (ex.: #tortas-doces), se existir
+      var anchor = url.hash.slice(0, marker);
+      url.hash = anchor.length > 1 ? anchor : "";
+      window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
+    } catch (e) {
+      /* Ambientes sem suporte (ex.: file://) são ignorados */
+    }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --green:#273930;
+    --green-soft:#415849;
+    --gold:#b08d4f;
+    --gold-soft:#c9ab74;
+    --cream:#f8f4ec;
+    --paper:#fffdf9;
+    --line:rgba(39,57,48,.18);
+    --muted:rgba(39,57,48,.62);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{
+    background:var(--cream);color:var(--green);
+    font-family:"Jost",system-ui,sans-serif;font-weight:300;line-height:1.5;
+  }
+  .page{
+    width:210mm;height:297mm;margin:12mm auto;background:var(--paper);
+    padding:15mm;box-shadow:0 10px 40px -18px rgba(39,57,48,.4);
+    position:relative;display:flex;flex-direction:column;overflow:hidden;
+  }
+  .frame{position:absolute;inset:7mm;border:1px solid var(--line);pointer-events:none}
+  .content{position:relative;z-index:1;flex:1;display:flex;flex-direction:column}
+
+  .cover{text-align:center;padding-top:2mm;margin-bottom:8mm}
+  .logo{width:70px;height:auto;display:block;margin:0 auto 4mm}
+  .brand{
+    font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;
+    font-size:15pt;letter-spacing:.14em;text-transform:uppercase;
+  }
+  .brand .le{color:var(--gold)}
+  .tagline{font-size:7.4pt;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);margin-top:2mm}
+  .rule{display:flex;align-items:center;justify-content:center;gap:3mm;margin:5mm auto 5mm;color:var(--gold)}
+  .rule::before,.rule::after{content:"";height:1px;width:32mm;background:linear-gradient(to right,transparent,var(--gold-soft),transparent)}
+  .rule span{font-size:8pt;letter-spacing:.3em}
+  h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:28pt;letter-spacing:.06em;line-height:1}
+  .contact{margin-top:4mm;font-size:8.2pt;letter-spacing:.05em;color:var(--muted)}
+  .contact b{color:var(--green);font-weight:500}
+  .page-head{text-align:center;margin-bottom:7mm}
+  .page-head .brand{font-size:13pt}
+
+  section{margin-bottom:5mm;break-inside:avoid}
+  .sec-head{display:flex;align-items:baseline;justify-content:center;gap:4mm;margin-bottom:4mm}
+  .sec-head h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:16pt;letter-spacing:.16em;text-transform:uppercase}
+  .sec-head .note{font-size:7pt;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .sec-rule{height:1px;background:var(--line);margin:0 0 4mm}
+
+  .cols{column-count:2;column-gap:9mm}
+  .item{display:flex;align-items:baseline;gap:2mm;padding:1.6mm 0;break-inside:avoid;border-bottom:1px dotted rgba(39,57,48,.16)}
+  .item:last-child{border-bottom:0}
+  .name{font-family:"Cormorant Garamond",Georgia,serif;font-size:11.4pt;font-weight:500;line-height:1.15}
+  .price{font-size:9.6pt;font-weight:500;white-space:nowrap}
+  .price small{font-weight:300;color:var(--muted);font-size:7pt}
+  .desc{font-size:7.6pt;color:var(--muted);font-weight:300;display:block;margin-top:.6mm;line-height:1.35}
+
+  .price-head{
+    display:grid;grid-template-columns:1fr 20mm 20mm;font-size:7pt;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--gold);font-weight:500;text-align:right;
+    padding:0 0 2mm;border-bottom:1px solid var(--line);margin-bottom:2.5mm;
+  }
+  .price-head span:first-child{text-align:left}
+  .price-head.single{grid-template-columns:1fr 28mm}
+  .two-col .item{display:grid;grid-template-columns:1fr 20mm 20mm;gap:0}
+  .two-col .item .price{text-align:right}
+
+  .item.one{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between}
+  .item.one .name{flex:1 1 auto}
+  .item.one .price{text-align:right;padding-left:3mm}
+  .item.one .desc{flex:0 0 100%;margin-top:.6mm}
+
+  .callout{margin:4.5mm 0;padding:3.5mm 4mm;background:rgba(176,141,79,.09);border-left:2px solid var(--gold);font-size:8pt;color:var(--green-soft);letter-spacing:.02em;break-inside:avoid}
+  .callout b{font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:7.2pt;color:var(--gold)}
+
+  .feature{position:relative;overflow:hidden;border-radius:3px;margin-bottom:6mm;box-shadow:0 8px 24px -14px rgba(39,57,48,.5)}
+  .feature img{width:100%;height:46mm;object-fit:cover;display:block}
+  .feature .fc{
+    position:absolute;inset:auto 0 0 0;padding:8mm 6mm 5mm;color:#fff;
+    background:linear-gradient(to top,rgba(39,57,48,.92),rgba(39,57,48,.55) 55%,transparent);
+  }
+  .feature .fc .k{font-size:6.8pt;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft);font-weight:500}
+  .feature .fc .t{font-family:"Cormorant Garamond",Georgia,serif;font-size:15pt;font-weight:500;margin-top:1mm}
+
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:5mm;margin-top:1mm}
+  .gallery.two{grid-template-columns:repeat(2,1fr)}
+  .gallery.two .ph img{aspect-ratio:auto;height:30mm}
+  .gcard{break-inside:avoid;text-align:center}
+  .gcard .ph{position:relative;overflow:hidden;border-radius:3px;box-shadow:0 6px 18px -12px rgba(39,57,48,.5)}
+  .gcard img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .6s}
+  .gcard .cap{font-family:"Cormorant Garamond",Georgia,serif;font-size:9.6pt;font-weight:500;margin-top:2mm}
+  .gcard .cap small{display:block;font-family:"Jost",sans-serif;font-size:6.8pt;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:.5mm}
+
+  .foot{margin-top:auto;padding-top:5mm;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:6mm;font-size:7.6pt;color:var(--muted);letter-spacing:.04em}
+  .foot .f-brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:11pt;color:var(--green);letter-spacing:.06em}
+  .foot .f-brand .le{color:var(--gold)}
+  .foot div{text-align:right;line-height:1.5}
+
+  @page{size:A4;margin:0}
+  @media print{
+    body{background:#fff}
+    .page{margin:0;box-shadow:none;height:297mm}
+    .page+.page{page-break-before:always}
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="frame"></div>
+  <div class="content">
+
+    <header class="cover">
+      <img class="logo" src="images/logo-original.png" alt="ArtesanaLÊ Torteria &amp; Cia"/>
+      <div class="brand">Artesana<span class="le">LÊ</span> Torteria &amp; Cia</div>
+      <div class="tagline">Produtos Elaborados Artesanalmente</div>
+      <div class="rule"><span>CARDÁPIO</span></div>
+      <h1>Cardápio</h1>
+      <div class="contact">
+        <b>(19) 99197-5629</b> &nbsp;·&nbsp; @artesanale_torteria_e_cia &nbsp;·&nbsp; R. Riachuelo, 913 — Centro, Santa Bárbara d'Oeste/SP
+      </div>
+    </header>
+
+    <figure class="feature">
+      <img src="images/torta-queijo-tomate-bufala-pesto.jpg" alt="Torta de queijo com tomate, queijo de búfala e pesto"/>
+      <figcaption class="fc">
+        <div class="k">Destaque</div>
+        <div class="t">Torta de Queijo com Tomate, Búfala e Pesto</div>
+      </figcaption>
+    </figure>
+
+    <section>
+      <div class="sec-head"><h2>Tortas Salgadas</h2><span class="note">aprox. 1100 g</span></div>
+      <div class="sec-rule"></div>
+      <div class="two-col">
+        <div class="price-head"><span>Sabores</span><span>Individual</span><span>Grande</span></div>
+        <div class="cols">
+          <div class="item"><span class="name">Frango com Catupiry</span><span class="price">19</span><span class="price">99</span></div>
+          <div class="item"><span class="name">Costelinha Barbecue</span><span class="price">22</span><span class="price">109</span></div>
+          <div class="item"><span class="name">Cebola</span><span class="price">18</span><span class="price">89</span></div>
+          <div class="item"><span class="name">Carne Seca com Requeijão</span><span class="price">22</span><span class="price">109</span></div>
+          <div class="item"><span class="name">Camarão Rosa com Catupiry</span><span class="price">26</span><span class="price">129</span></div>
+          <div class="item"><span class="name">Pera com Gorgonzola</span><span class="price">19</span><span class="price">99</span></div>
+          <div class="item"><span class="name">Figo com Presunto Parma</span><span class="price">22</span><span class="price">119</span></div>
+          <div class="item"><span class="name">Peito de Peru e Alho Poró</span><span class="price">19</span><span class="price">109</span></div>
+          <div class="item"><span class="name">Palmito com Catupiry</span><span class="price">19</span><span class="price">99</span></div>
+          <div class="item"><span class="name">Caprese</span><span class="price">18</span><span class="price">99</span></div>
+          <div class="item"><span class="name">Margherita com Pesto</span><span class="price">19</span><span class="price">99</span></div>
+          <div class="item"><span class="name">Portuguesa</span><span class="price">19</span><span class="price">99</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><h2>Bebidas</h2><span class="note">por unidade</span></div>
+      <div class="sec-rule"></div>
+      <div class="price-head single"><span>Itens</span><span>Valor</span></div>
+      <div class="cols">
+        <div class="item one"><span class="name">Coca / Coca Zero <small>(350 ml)</small></span><span class="price">R$ 7</span></div>
+        <div class="item one"><span class="name">Água sem Gás / Água com Gás <small>(510 ml)</small></span><span class="price">R$ 4</span></div>
+        <div class="item one">
+          <span class="name">Suco de Polpa <small>(300 ml)</small></span>
+          <span class="price">R$ 8</span>
+          <span class="desc">Acerola c/ laranja · Abacaxi c/ hortelã · Maracujá</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div class="f-brand">Artesana<span class="le">LÊ</span> Torteria &amp; Cia</div>
+      <div>Produtos Elaborados Artesanalmente<br/>Santa Bárbara d'Oeste — SP</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="page">
+  <div class="frame"></div>
+  <div class="content">
+
+    <div class="page-head">
+      <div class="brand">Artesana<span class="le">LÊ</span> Torteria &amp; Cia</div>
+      <div class="tagline">Produtos Elaborados Artesanalmente</div>
+    </div>
+
+    <section>
+      <div class="sec-head"><h2>Tortas Doces</h2><span class="note">aprox. 900 g</span></div>
+      <div class="sec-rule"></div>
+      <div class="two-col">
+        <div class="price-head"><span>Sabores</span><span>Individual</span><span>Grande</span></div>
+        <div class="cols">
+          <div class="item"><span class="name">Brigadeiro Gourmet</span><span class="price">18</span><span class="price">79</span></div>
+          <div class="item"><span class="name">Limão</span><span class="price">18</span><span class="price">79</span></div>
+          <div class="item"><span class="name">Fudge Chocolate Meio Amargo c/ Caramelo Salgado</span><span class="price">22</span><span class="price">129</span></div>
+          <div class="item"><span class="name">Cheese Cake de Frutas Vermelhas</span><span class="price">25</span><span class="price">109</span></div>
+          <div class="item"><span class="name">Dois Amores</span><span class="price">18</span><span class="price">89</span></div>
+          <div class="item"><span class="name">Surpresa de Uva</span><span class="price">22</span><span class="price">89</span></div>
+          <div class="item"><span class="name">Creme Ninho com Uva</span><span class="price">18</span><span class="price">79</span></div>
+          <div class="item"><span class="name">Maracujá</span><span class="price">18</span><span class="price">79</span></div>
+          <div class="item"><span class="name">Coco Cremoso</span><span class="price">18</span><span class="price">79</span></div>
+          <div class="item"><span class="name">Meio a Meio (Limão / Brigadeiro)</span><span class="price">18</span><span class="price">79</span></div>
+          <div class="item"><span class="name">Morango com Creme</span><span class="price">20</span><span class="price">89</span></div>
+        </div>
+        <div class="callout"><b>Encomenda de tortas com 1 dia de antecedência</b></div>
+        <div class="price-head"><span>Sabores</span><span>Individual</span><span>Grande</span></div>
+        <div class="cols">
+          <div class="item"><span class="name">Creme de Café com Caramelo</span><span class="price">23</span><span class="price">109</span></div>
+          <div class="item"><span class="name">Mousse de Chocolate com Pistache</span><span class="price">24</span><span class="price">119</span></div>
+          <div class="item"><span class="name">Creme e Frutas <small>(Morango, Uva e Mirtilo)</small></span><span class="price">20</span><span class="price">99</span></div>
+          <div class="item"><span class="name">Banoffee</span><span class="price">18</span><span class="price">79</span></div>
+          <div class="item"><span class="name">Pavlova</span><span class="price">18</span><span class="price">99</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="gallery">
+        <figure class="gcard">
+          <div class="ph"><img src="images/torta-limao.jpg" alt="Torta de Limão com merengue"/></div>
+          <figcaption class="cap">Torta de Limão<small>Doce</small></figcaption>
+        </figure>
+        <figure class="gcard">
+          <div class="ph"><img src="images/torta-coco-cremoso.jpg" alt="Torta de Coco Cremoso"/></div>
+          <figcaption class="cap">Coco Cremoso<small>Doce</small></figcaption>
+        </figure>
+        <figure class="gcard">
+          <div class="ph"><img src="images/cheesecake-frutas-vermelhas.jpg" alt="Cheesecake de frutas vermelhas"/></div>
+          <figcaption class="cap">Cheese Cake de Frutas Vermelhas<small>Doce</small></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div class="f-brand">Artesana<span class="le">LÊ</span> Torteria &amp; Cia</div>
+      <div>(19) 99197-5629 · @artesanale_torteria_e_cia<br/>R. Riachuelo, 913 — Centro, Santa Bárbara d'Oeste/SP</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="page">
+  <div class="frame"></div>
+  <div class="content">
+
+    <div class="page-head">
+      <div class="brand">Artesana<span class="le">LÊ</span> Torteria &amp; Cia</div>
+      <div class="tagline">Produtos Elaborados Artesanalmente</div>
+    </div>
+
+    <section>
+      <div class="sec-head"><h2>Torteletes Doces</h2><span class="note">Individual</span></div>
+      <div class="sec-rule"></div>
+      <div class="gallery two" style="margin-bottom:4mm">
+        <figure class="gcard">
+          <div class="ph"><img src="images/tortelete-dois-amores.jpg" alt="Tortele Dois Amores"/></div>
+          <figcaption class="cap">Tortele Dois Amores<small>Individual</small></figcaption>
+        </figure>
+        <figure class="gcard">
+          <div class="ph"><img src="images/tortelete-ninho-uvas.jpg" alt="Tortele de Ninho com Uvas"/></div>
+          <figcaption class="cap">Tortele de Ninho com Uvas<small>Individual</small></figcaption>
+        </figure>
+      </div>
+      <div class="cols">
+        <div class="item"><span class="name">Brigadeiro</span></div>
+        <div class="item"><span class="name">Limão</span></div>
+        <div class="item"><span class="name">Dois Amores</span></div>
+        <div class="item"><span class="name">Banoffee</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><h2>Massas</h2><span class="note">por Kg</span></div>
+      <div class="sec-rule"></div>
+      <div class="price-head single"><span>Itens</span><span>Valor</span></div>
+      <div class="cols">
+        <div class="item one">
+          <span class="name">Canelone</span>
+          <span class="price">R$ 69<small>/Kg</small></span>
+          <span class="desc">Massa artesanal, presunto, mussarela e catupiry. Molhos: branco, vermelho ou rosé.</span>
+        </div>
+        <div class="item one">
+          <span class="name">Lasanha</span>
+          <span class="price">R$ 69<small>/Kg</small></span>
+          <span class="desc">Massa artesanal, presunto, mussarela e parmesão com molhos bolonhesa + branco.</span>
+        </div>
+        <div class="item one">
+          <span class="name">Tortano de Presunto, Queijo, Tomate e Catupiry</span>
+          <span class="price">R$ 49,90<small>/750 g</small></span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><h2>Diversos</h2><span class="note">por porção</span></div>
+      <div class="sec-rule"></div>
+      <div class="price-head single"><span>Itens</span><span>Valor</span></div>
+      <div class="cols">
+        <div class="item one">
+          <span class="name">Antepasto</span>
+          <span class="price">R$ 39<small>/500 g</small></span>
+          <span class="desc">Berinjela, cebola, pimentões verde e vermelho, azeitonas pretas, uvas-passas e azeite.</span>
+        </div>
+        <div class="item one"><span class="name">Coalhada Seca</span><span class="price">R$ 20<small>/120 g</small></span></div>
+        <div class="item one"><span class="name">Escondidinho de Carne Seca</span><span class="price">R$ 55<small>/500 g</small></span></div>
+        <div class="item one"><span class="name">Maionese</span><span class="price">R$ 29<small>/500 g</small></span></div>
+        <div class="item one"><span class="name">Crostata</span><span class="price">R$ 15</span></div>
+        <div class="item one"><span class="name">Escabeche de Lagarto</span><span class="price">R$ 55<small>/750 g</small></span></div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div class="f-brand">Artesana<span class="le">LÊ</span> Torteria &amp; Cia</div>
+      <div>
+        Terça a Sexta 10h–18h30 · Sábado 9h–13h30<br/>
+        (19) 99197-5629 · @artesanale_torteria_e_cia
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -3,6 +3,25 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+  <!-- Limpa "text fragments" (#:~:text=...) da barra de endereços, sem recarregar a página -->
+  <script>
+    (function () {
+      if (!window.history || typeof window.history.replaceState !== "function") return;
+      try {
+        var url = new URL(window.location.href);
+        var marker = url.hash.indexOf(":~:text=");
+        if (marker === -1) return;
+        // Mantém o âncora anterior (ex.: #produtos), se existir
+        var anchor = url.hash.slice(0, marker);
+        url.hash = anchor.length > 1 ? anchor : "";
+        window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
+      } catch (e) {
+        /* Ambientes sem suporte (ex.: file://) são ignorados */
+      }
+    })();
+  </script>
+
   <link rel="icon" type="image/png" href="images/logo.png"/>
   <meta content="ArtesanaLÊ Torteria &amp; Cia - alta gastronomia em cada torta. Especialistas em tortas artesanais, doces, salgadas e acompanhamentos em Santa Bárbara d'Oeste. Encomendas e pronta entrega." name="description"/>
   <meta content="ArtesanaLÊ Torteria &amp; Cia" property="og:title"/>
