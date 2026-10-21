@@ -105,6 +105,10 @@
       .product-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
+      /* No desktop/tablet, o Tortele de Ninho com Uvas não aparece (permanece no mobile) */
+      .product-grid > .product-card.hide-desktop {
+        display: none;
+      }
     }
 
     .product-card {
@@ -143,6 +147,60 @@
       flex-direction: column;
       flex-grow: 1;
       justify-content: space-between;
+    }
+
+    /* Serviços */
+    .services-block {
+      margin-top: 4.5rem;
+    }
+    .services-head {
+      text-align: center;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.75rem;
+    }
+    @media (min-width: 640px) {
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    .service-card {
+      background: #ffffff;
+      border: 1px solid rgba(39, 57, 48, 0.08);
+      border-radius: 6px;
+      padding: 1.5rem 1.5rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px -10px rgba(39, 57, 48, 0.12);
+      border-color: rgba(200, 162, 86, 0.4);
+    }
+    .service-card .service-number {
+      font-family: var(--font-body);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      font-weight: 600;
+      color: hsl(var(--gold-ink));
+    }
+    .service-card h4 {
+      font-family: var(--font-heading);
+      font-weight: 500;
+      font-size: 1.3rem;
+      color: hsl(var(--primary));
+      margin-top: 0.4rem;
+    }
+    .service-card p {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: hsl(var(--primary) / 0.8);
+      margin-top: 0.55rem;
     }
   </style>
 </head>
@@ -240,7 +298,7 @@
       <div class="mx-auto max-w-7xl">
 
         <div class="text-center mb-14">
-          <span class="label-caps text-gold-ink font-semibold tracking-widest">Nossos Produtos</span>
+          <span class="label-caps text-gold-ink font-semibold tracking-widest">Nossos Produtos e Serviços</span>
           <h2 class="font-serif font-normal text-primary text-3xl sm:text-5xl mt-4 text-balance">Obras-primas da casa</h2>
           <p class="mt-5 max-w-xl mx-auto text-primary font-body text-balance">
             Cada torta é elaborada artesanalmente — da massa crocante ao recheio aveludado — com o cuidado que só o feito à mão oferece.
@@ -257,7 +315,7 @@
           <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent p-6 sm:p-8 text-background">
             <span class="label-caps text-gold-light text-xs font-semibold">Destaque da Casa</span>
             <h3 class="font-serif text-3xl sm:text-4xl font-medium mt-1">Torta de Limão</h3>
-            <p class="text-background/90 text-sm sm:text-base mt-2 max-w-lg">Massa amanteigada crocante com curd de limão equilibrado e merengue generoso tostado no maçarico.</p>
+            <p class="text-background/90 text-sm sm:text-base mt-2 max-w-lg">Massa sablée crocante com curd de limão equilibrado e merengue generoso tostado no maçarico.</p>
             <span class="mt-4 inline-flex items-center gap-2 label-caps text-xs font-medium text-background group-hover:text-gold-light transition-colors">
               <span>Encomendar via WhatsApp</span>
               <span>&rarr;</span>
@@ -268,30 +326,7 @@
         <!-- Grade com os demais produtos da casa -->
         <div class="product-grid">
 
-          <!-- 2. Torta de Coco Cremoso -->
-          <article class="product-card">
-            <div class="product-img-box">
-              <picture>
-                <source srcset="images/torta-coco-cremoso.webp" type="image/webp"/>
-                <img src="images/torta-coco-cremoso.jpg" alt="Torta de Coco Cremoso" class="product-thumb" loading="lazy"/>
-              </picture>
-              <span class="absolute top-3 left-3 label-caps px-2.5 py-1 bg-background/95 text-primary text-[10px] font-semibold rounded-xs">Torta Doce</span>
-            </div>
-            <div class="product-content">
-              <div>
-                <h3 class="font-serif text-xl font-medium text-primary">Torta de Coco Cremoso</h3>
-                <p class="mt-2 text-primary/80 text-sm leading-relaxed">
-                  Massa artesanal amanteigada, recheio denso de coco cremoso e lâminas finas de coco fresco no topo.
-                </p>
-              </div>
-              <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20a%20Torta%20de%20Coco%20Cremoso." target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-between text-xs font-medium label-caps text-gold-ink hover:text-primary transition-colors">
-                <span>Encomendar via WhatsApp</span>
-                <span>&rarr;</span>
-              </a>
-            </div>
-          </article>
-
-          <!-- 3. Torta de Queijo com Tomate, Queijo de Búfala e Pesto -->
+          <!-- 1. Torta de Queijo com Tomate, Queijo de Búfala e Pesto -->
           <article class="product-card">
             <div class="product-img-box">
               <picture>
@@ -304,7 +339,7 @@
               <div>
                 <h3 class="font-serif text-xl font-medium text-primary">Torta de Queijo com Tomate, Búfala e Pesto</h3>
                 <p class="mt-2 text-primary/80 text-sm leading-relaxed">
-                  Massa folhada crocante, queijo selecionado, tomate maduro, queijo de búfala e toque de pesto fresco.
+                  Massa podre (pâte brisée) crocante, queijo selecionado, tomate maduro, queijo de búfala e toque de pesto fresco.
                 </p>
               </div>
               <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20a%20Torta%20de%20Queijo%20com%20Tomate%2C%20B%C3%BAfala%20e%20Pesto." target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-between text-xs font-medium label-caps text-gold-ink hover:text-primary transition-colors">
@@ -314,7 +349,7 @@
             </div>
           </article>
 
-          <!-- 4. Caponata de Berinjela -->
+          <!-- 2. Caponata de Berinjela -->
           <article class="product-card">
             <div class="product-img-box">
               <picture>
@@ -331,6 +366,52 @@
                 </p>
               </div>
               <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20a%20Caponata%20de%20Berinjela." target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-between text-xs font-medium label-caps text-gold-ink hover:text-primary transition-colors">
+                <span>Encomendar via WhatsApp</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 3. Torta de Figo, Presunto Parma e Mel -->
+          <article class="product-card">
+            <div class="product-img-box">
+              <picture>
+                <source srcset="images/torta-figo.webp" type="image/webp"/>
+                <img src="images/torta-figo.jpg" alt="Torta de Figo, Presunto Parma e Mel" class="product-thumb" loading="lazy"/>
+              </picture>
+              <span class="absolute top-3 left-3 label-caps px-2.5 py-1 bg-background/95 text-primary text-[10px] font-semibold rounded-xs">Torta Salgada</span>
+            </div>
+            <div class="product-content">
+              <div>
+                <h3 class="font-serif text-xl font-medium text-primary">Torta de Figo, Presunto Parma e Mel</h3>
+                <p class="mt-2 text-primary/80 text-sm leading-relaxed">
+                  Figos, presunto Parma e mel em massa artesanal crocante, numa combinação agridoce equilibrada.
+                </p>
+              </div>
+              <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20a%20Torta%20de%20Figo%2C%20Presunto%20Parma%20e%20Mel." target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-between text-xs font-medium label-caps text-gold-ink hover:text-primary transition-colors">
+                <span>Encomendar via WhatsApp</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 4. Torta de Coco Cremoso -->
+          <article class="product-card">
+            <div class="product-img-box">
+              <picture>
+                <source srcset="images/torta-coco-cremoso.webp" type="image/webp"/>
+                <img src="images/torta-coco-cremoso.jpg" alt="Torta de Coco Cremoso" class="product-thumb" loading="lazy"/>
+              </picture>
+              <span class="absolute top-3 left-3 label-caps px-2.5 py-1 bg-background/95 text-primary text-[10px] font-semibold rounded-xs">Torta Doce</span>
+            </div>
+            <div class="product-content">
+              <div>
+                <h3 class="font-serif text-xl font-medium text-primary">Torta de Coco Cremoso</h3>
+                <p class="mt-2 text-primary/80 text-sm leading-relaxed">
+                  Massa artesanal amanteigada, recheio denso de coco cremoso e lâminas finas de coco fresco no topo.
+                </p>
+              </div>
+              <a href="https://wa.me/5519991975629?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20a%20Torta%20de%20Coco%20Cremoso." target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-between text-xs font-medium label-caps text-gold-ink hover:text-primary transition-colors">
                 <span>Encomendar via WhatsApp</span>
                 <span>&rarr;</span>
               </a>
@@ -361,7 +442,7 @@
           </article>
 
           <!-- 6. Tortele de Ninho com Uvas -->
-          <article class="product-card">
+          <article class="product-card hide-desktop">
             <div class="product-img-box">
               <picture>
                 <source srcset="images/tortelete-ninho-uvas.webp" type="image/webp"/>
@@ -408,6 +489,39 @@
 
         </div>
 
+        <!-- Serviços -->
+        <div class="services-block">
+          <div class="services-head">
+            <span class="label-caps text-gold-ink font-semibold tracking-widest">Além das tortas</span>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card">
+              <span class="service-number">01</span>
+              <h4>Almoço</h4>
+              <p>Pratos com saladas, massas artesanais e acompanhamentos.</p>
+            </article>
+
+            <article class="service-card">
+              <span class="service-number">02</span>
+              <h4>Congelados</h4>
+              <p>Variedade de tortas, massas, pizzas e salgados.</p>
+            </article>
+
+            <article class="service-card">
+              <span class="service-number">03</span>
+              <h4>Atendimento</h4>
+              <p>Disponível para consumo no local ou entrega.</p>
+            </article>
+
+            <article class="service-card">
+              <span class="service-number">04</span>
+              <h4>Atacado e Revenda</h4>
+              <p>Trabalhamos com revenda e contamos com um cardápio exclusivo para o atacado.</p>
+            </article>
+          </div>
+        </div>
+
         <!-- CTA Único -->
         <div class="text-center mt-16">
           <p class="text-primary font-body text-base mb-5">Encomende para eventos especiais, sobremesas de domingo ou saboreie no nosso espaço em Santa Bárbara d'Oeste.</p>
@@ -445,7 +559,7 @@
               A ArtesanaLÊ Torteria &amp; Cia nasceu em Santa Bárbara d'Oeste da paixão em levar a alta confeitaria e gastronomia artesanal para o dia a dia, sem perder o carinho e o afeto de cada fornada.
             </p>
             <p>
-              Sofisticada e acolhedora: aqui você prova uma tortelete com um café fresco moído no local, encomenda a torta assinatura para seu evento de família ou garante antepastos especiais para presentear. Variedade em doces, salgados e massas artesanais.
+              Sofisticada e acolhedora: aqui você prova uma tortelete com um café expresso, encomenda a torta assinatura para seu evento de família ou garante antepastos especiais para presentear. Variedade em doces, salgados e massas artesanais.
             </p>
             <p class="font-serif text-xl text-primary italic pt-2">
               "Produtos Elaborados Artesanalmente."
